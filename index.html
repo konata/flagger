@@ -77,11 +77,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#flagger" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -244,8 +239,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
       <a href="." class="md-nav__link md-nav__link--active">
         
@@ -274,33 +267,15 @@
   
   
   
-    
-    
-      
+    <li class="md-nav__item">
+      <a href="reports/" class="md-nav__link">
         
-          
-        
-      
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
-        
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="reports/" class="md-nav__link ">
-              
   
   
   <span class="md-ellipsis">
     
   
-    Reports
+    Archives
   
 
     
@@ -308,26 +283,7 @@
   
   
 
-            </a>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Reports
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-          </ul>
-        </nav>
-      
+      </a>
     </li>
   
 
@@ -349,8 +305,6 @@
   
   
   
-    
-  
   
 </nav>
                   </div>
@@ -368,17 +322,53 @@
 
 
 <div class="hero">
-<h1 id="flagger">Flagger<a class="headerlink" href="#flagger" title="Anchor">&para;</a></h1>
-<p class="hero-lede">Daily digest of newly added, removed, and modified [aconfig](https://source.android.com/docs/core/ota/modular-system/aconfig) feature flags in AOSP. Security-adjacent changes are highlighted so they're easy to skim.</p>
-<div class="hero-stats">
-<div class="hero-stat"><strong>2625</strong><span>flags tracked</span></div>
-<div class="hero-stat"><strong>243</strong><span>aconfig files</span></div>
-<div class="hero-stat"><strong>0</strong><span>daily reports</span></div>
-<div class="hero-stat"><strong>2026-04-14</strong><span>last scan</span></div>
+<div class="hero-grid">
+<div class="hero-copy">
+    <p class="hero-kicker">Android Flag Radar</p>
+    <h1>Flagger</h1>
+    <p class="hero-lede">Daily digest of newly added, removed, and modified <a href="https://source.android.com/docs/core/ota/modular-system/aconfig">aconfig</a> feature flags in AOSP. Security-adjacent changes are highlighted so they're easy to skim.</p>
+    <div class="hero-pills">
+      <span>Daily snapshots</span>
+      <span>AOSP aconfig</span>
+      <span>Security-adjacent diffs</span>
+    </div>
 </div>
+<aside class="hero-note">
+    <span class="hero-note-label">Current baseline</span>
+    <strong>2026-04-14</strong>
+    <p>2625 flags across 243 aconfig files currently indexed.</p>
+  </aside>
+</div>
+<div class="hero-stats">
+  <div class="hero-stat"><strong>2625</strong><span>flags tracked</span></div>
+  <div class="hero-stat"><strong>243</strong><span>aconfig files</span></div>
+  <div class="hero-stat"><strong>0</strong><span>daily reports</span></div>
+  <div class="hero-stat"><strong>2026-04-14</strong><span>last scan</span></div>
+</div>
+
 </div>
 <div class="empty-state">
-<p>The first daily scan has not produced a diff yet — come back tomorrow for fresh intel.</p>
+  <div class="empty-state__header">
+    <div>
+      <p class="empty-state__kicker">Timeline</p>
+      <h2>Waiting for the first diff</h2>
+    </div>
+    <p class="empty-state__lede">The current snapshot has established the baseline. The next successful comparison will land here and in Archives.</p>
+  </div>
+  <div class="empty-state__grid">
+    <div class="empty-state__card">
+      <strong>Baseline stored</strong>
+      <span>Snapshot date: 2026-04-14</span>
+    </div>
+    <div class="empty-state__card">
+      <strong>Next milestone</strong>
+      <span>Publish the first added / removed / modified diff.</span>
+    </div>
+    <div class="empty-state__card">
+      <strong>Where to look</strong>
+      <span>The freshest report will appear here first, then roll into Archives.</span>
+    </div>
+  </div>
 </div>
 
 
