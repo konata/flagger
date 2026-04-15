@@ -3,33 +3,16 @@
 
 <head>
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Archives - Flagger</title>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+
     <style>
-      /* load heading font */
-      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400');
-      @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@400');
-      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700');
-      @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@700');
-
-      /* load body font */
-      @import url('https://fonts.googleapis.com/css2?family=Source Sans 3:wght@400');
-      @import url('https://fonts.googleapis.com/css2?family=Source Sans 3:ital,wght@400');
-      @import url('https://fonts.googleapis.com/css2?family=Source Sans 3:wght@700');
-      @import url('https://fonts.googleapis.com/css2?family=Source Sans 3:ital,wght@700');
-
-      /* load mono font */
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains Mono:wght@400');
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains Mono:ital,wght@400');
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains Mono:wght@700');
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains Mono:ital,wght@700');
-
-      /* load emoji font */
-      @font-face {
-        font-family: "Noto Color Emoji";
-        src: url('../assets/fonts/emoji/NotoColorEmoji-Regular.ttf');
-        font-weight: 400;
-      }
-  
       :root {
         /* colors */
         --primary: #89dceb;
@@ -54,30 +37,26 @@
         --crust-text: var(--text);
         --overlay-text: var(--hltext);
         --footer-text: var(--hltext);
-        /* fonts */
-        --heading: Lato, Noto Color Emoji;
-        --body: Source Sans 3, Noto Color Emoji;
-        --mono: JetBrains Mono, Noto Color Emoji;
-        font-family: var(--body); 
+        /* fonts — system-UI fallbacks so first paint is stable */
+        --heading: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-family: var(--body);
       }
       /* dark mode */
       @media (prefers-color-scheme: dark) {
         :root {
-          /* colors */
           --primary: #89dceb;
           --secondary: #f5c27f;
           --tertiary: #f5c2e7;
-          /* shades */
           --base: #1e1b1b;
           --mantle: #292426;
           --crust: #332b2f;
           --overlay: #7c6f74;
           --footer: #00000022;
-          /* text */
           --text: #c6c6c6;
           --hltext: #ffffff;
           color: var(--text);
-          /* background-specific text */
           --primary-text: var(--text);
           --secondary-text: var(--text);
           --tertiary-text: var(--text);
@@ -88,7 +67,7 @@
           --footer-text: var(--text);
         }
       }
-      /* style settings */
+      /* upstream layout rules that need theme tokens baked in */
       header#header {
         grid-template-columns: 8rem auto 8rem;
       }
@@ -99,7 +78,7 @@
       }
       #background-gradient {
         background: linear-gradient(
-          45deg, 
+          45deg,
           color-mix(in srgb, var(--mantle) 80%, transparent), transparent, color-mix(in srgb, var(--crust) 20%, transparent)
         );
       }
@@ -124,11 +103,9 @@
     <link rel="icon" type="image/x-icon" href=assets/landing-favicon.png>
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/responsivity.css" rel="stylesheet">
-    <link href="../stylesheets/extra.css" rel="stylesheet">  
+    <link href="../stylesheets/extra.css" rel="stylesheet">
     <script src="../search/main.js"></script>
     <script src="https://kit.fontawesome.com/b57355f8ac.js" crossorigin="anonymous"></script>
-    <script id="altmetric-embed-js" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/altmetric_badges-e7ba41a192efc3e63f5d48f8a1916dec4b1b49c01075bc7b39481408957b3b28.js"></script>
-    <link id="altmetric-embed-css" rel="stylesheet" type="text/css" href="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed-59614f5c46b49b21eeef3bb28c4fb38d1e7069e8d014752fcb66e84942556802.css">
     <script>
       function on_share() {
         navigator.share({
@@ -159,15 +136,6 @@
     <nav class="vertical" id="toc">
 
 <ul>
-
-<li class="nav-item">
-<a href="#archive">Archive</a>
-    
-    <ul>
-    
-    </ul>
-    
-</li>
 
 </ul>
 
