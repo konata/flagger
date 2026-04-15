@@ -285,6 +285,92 @@ main#page :hover > .headerlink {
   gap: 0.4rem;
 }
 
+/* ---------- flag list (Recent flags by bug ID) -------------------------- */
+
+/* Denser than .post-list — we render up to 50 of these, so each row
+   has to stay compact without losing scannability. The bug link sits
+   on the right of the head row so the eye can chain down it. */
+
+.flag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 1.1rem 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.flag-list .flag {
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--flagger-hairline);
+  border-radius: var(--flagger-radius);
+  background: var(--flagger-panel);
+  transition: border-color .18s ease, background-color .18s ease;
+}
+
+.flag-list .flag:hover {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--flagger-hairline));
+  background: color-mix(in srgb, var(--mantle) 94%, transparent);
+}
+
+.flag-list .flag-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+/* The main#page prefix is intentional — it bumps specificity past the
+   generic `main#page :not(pre) > code` rule below, which would otherwise
+   re-add a border + padding to this <code> element. */
+main#page .flag-list .flag-key {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  color: var(--hltext);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.flag-list .flag-bug {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.flag-list .flag-bug:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.flag-list .flag-desc {
+  margin: 0.5rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--flagger-muted);
+}
+
+.flag-list .flag-meta {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+@media (max-width: 50rem) {
+  .flag-list .flag-key {
+    font-size: 0.78rem;
+  }
+}
+
 /* ---------- tags --------------------------------------------------------- */
 
 .tag {
