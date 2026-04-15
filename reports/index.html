@@ -1,177 +1,28 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Archives - Flagger</title>
-
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
-
-    <style>
-      :root {
-        /* colors */
-        --primary: #89dceb;
-        --secondary: #f5c27f;
-        --tertiary: #f5c2e7;
-        /* shades */
-        --base: #1e1b1b;
-        --mantle: #292426;
-        --crust: #332b2f;
-        --overlay: #7c6f74;
-        --footer: #000000cc;
-        /* text */
-        --text: #c6c6c6;
-        --hltext: #ffffff;
-        color: var(--text);
-        /* background-specific text */
-        --primary-text: var(--hltext);
-        --secondary-text: var(--hltext);
-        --tertiary-text: var(--hltext);
-        --base-text: var(--text);
-        --mantle-text: var(--text);
-        --crust-text: var(--text);
-        --overlay-text: var(--hltext);
-        --footer-text: var(--hltext);
-        /* fonts — system-UI fallbacks so first paint is stable */
-        --heading: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
-        --body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
-        --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-family: var(--body);
-      }
-      /* dark mode */
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --primary: #89dceb;
-          --secondary: #f5c27f;
-          --tertiary: #f5c2e7;
-          --base: #1e1b1b;
-          --mantle: #292426;
-          --crust: #332b2f;
-          --overlay: #7c6f74;
-          --footer: #00000022;
-          --text: #c6c6c6;
-          --hltext: #ffffff;
-          color: var(--text);
-          --primary-text: var(--text);
-          --secondary-text: var(--text);
-          --tertiary-text: var(--text);
-          --base-text: var(--text);
-          --mantle-text: var(--text);
-          --crust-text: var(--text);
-          --overlay-text: var(--hltext);
-          --footer-text: var(--text);
-        }
-      }
-      /* upstream layout rules that need theme tokens baked in */
-      header#header {
-        grid-template-columns: 8rem auto 8rem;
-      }
-      body#background {
-        background: fixed center/cover var(--base);
-        
-        
-      }
-      #background-gradient {
-        background: linear-gradient(
-          45deg,
-          color-mix(in srgb, var(--mantle) 80%, transparent), transparent, color-mix(in srgb, var(--crust) 20%, transparent)
-        );
-      }
-      content#content {
-        padding: 0 2rem;
-        background: color-mix(in srgb, var(--base) 0%, transparent);
-        border-left: none;
-        border-right: none;
-      }
-      #avatar {
-        
-        border-radius: 1rem;
-        
-      }
-      footer#footer a {
-        color: #f5c27f;
-      }
-      footer#footer a:hover {
-        color: #f5c2e7;
-      }
-    </style>
-    <link rel="icon" type="image/x-icon" href=assets/landing-favicon.png>
-    <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/responsivity.css" rel="stylesheet">
-    <link href="../stylesheets/extra.css" rel="stylesheet">
-    <script src="../search/main.js"></script>
-    <script src="https://kit.fontawesome.com/b57355f8ac.js" crossorigin="anonymous"></script>
-    <script>
-      function on_share() {
-        navigator.share({
-          url: document.URL,
-          title: "Archives -Flagger",
-        });
-      }
-    </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archives — Flagger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="../style.css">
 </head>
-
-<body id="background">
-  <div id="background-gradient"></div>
-  <content id="content">
-  
-<a id="share-btn" onclick="on_share()">
-  <i class="fa fa-share-alt" alt="🔗"></i>
-</a>
-
-  
-  <header id="article-header">
-    <a href=.. id="return-home">
-        <i class="fa fa-arrow-left" alt="⇦"></i> Home
-    </a>
-    <h1 id="title">Archives</h1>
-</header>
-  
-  <main id="page">
-    <nav class="vertical" id="toc">
-
-<ul>
-
-</ul>
-
-</nav>
-    <h1 id="archive">Archive<a class="headerlink" href="#archive" title="Anchor">&para;</a></h1>
-<div class="empty-state">
-<p>No reports yet.</p>
-</div>
-    <nav id="page-controls">
-      <a href="#content" id="return-top">
-        <i class="fa fa-arrow-up" alt="⇧"></i> Return to top
-      </a>
+<body>
+<header class="site">
+  <div class="wrap">
+    <h1><a href="../index.html">Flagger</a></h1>
+    <div class="tagline">Daily digest of AOSP aconfig feature flag changes</div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../reports/index.html" class="active">Archives</a>
     </nav>
-  </main>
-  </content>
-  <footer id="footer">
-    
-
-<p>Compiled from markdown using <a href="https://www.mkdocs.org/">MkDocs</a>. Theme is <a href="https://teparsons.github.io/mkdocs-landing/">Landing</a> by <a href="https://toddparsons.co.uk">Todd Parsons</a>.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="../search/main.js"></script>
-
-  </footer>
+  </div>
+</header>
+<main>
+<section class="archives"><h1 style="font-family:var(--heading);color:var(--hltext);margin-top:0">Archives</h1>
+</section>
+</main>
 </body>
-
 </html>

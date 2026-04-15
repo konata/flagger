@@ -1,613 +1,391 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home - Flagger</title>
-
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
-
-    <style>
-      :root {
-        /* colors */
-        --primary: #89dceb;
-        --secondary: #f5c27f;
-        --tertiary: #f5c2e7;
-        /* shades */
-        --base: #1e1b1b;
-        --mantle: #292426;
-        --crust: #332b2f;
-        --overlay: #7c6f74;
-        --footer: #000000cc;
-        /* text */
-        --text: #c6c6c6;
-        --hltext: #ffffff;
-        color: var(--text);
-        /* background-specific text */
-        --primary-text: var(--hltext);
-        --secondary-text: var(--hltext);
-        --tertiary-text: var(--hltext);
-        --base-text: var(--text);
-        --mantle-text: var(--text);
-        --crust-text: var(--text);
-        --overlay-text: var(--hltext);
-        --footer-text: var(--hltext);
-        /* fonts — system-UI fallbacks so first paint is stable */
-        --heading: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
-        --body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
-        --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-family: var(--body);
-      }
-      /* dark mode */
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --primary: #89dceb;
-          --secondary: #f5c27f;
-          --tertiary: #f5c2e7;
-          --base: #1e1b1b;
-          --mantle: #292426;
-          --crust: #332b2f;
-          --overlay: #7c6f74;
-          --footer: #00000022;
-          --text: #c6c6c6;
-          --hltext: #ffffff;
-          color: var(--text);
-          --primary-text: var(--text);
-          --secondary-text: var(--text);
-          --tertiary-text: var(--text);
-          --base-text: var(--text);
-          --mantle-text: var(--text);
-          --crust-text: var(--text);
-          --overlay-text: var(--hltext);
-          --footer-text: var(--text);
-        }
-      }
-      /* upstream layout rules that need theme tokens baked in */
-      header#header {
-        grid-template-columns: 8rem auto 8rem;
-      }
-      body#background {
-        background: fixed center/cover var(--base);
-        
-        
-      }
-      #background-gradient {
-        background: linear-gradient(
-          45deg,
-          color-mix(in srgb, var(--mantle) 80%, transparent), transparent, color-mix(in srgb, var(--crust) 20%, transparent)
-        );
-      }
-      content#content {
-        padding: 0 2rem;
-        background: color-mix(in srgb, var(--base) 0%, transparent);
-        border-left: none;
-        border-right: none;
-      }
-      #avatar {
-        
-        border-radius: 1rem;
-        
-      }
-      footer#footer a {
-        color: #f5c27f;
-      }
-      footer#footer a:hover {
-        color: #f5c2e7;
-      }
-    </style>
-    <link rel="icon" type="image/x-icon" href=assets/landing-favicon.png>
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/responsivity.css" rel="stylesheet">
-    <link href="stylesheets/extra.css" rel="stylesheet">
-    <script src="search/main.js"></script>
-    <script src="https://kit.fontawesome.com/b57355f8ac.js" crossorigin="anonymous"></script>
-    <script>
-      function on_share() {
-        navigator.share({
-          url: document.URL,
-          title: "Home -Flagger",
-        });
-      }
-    </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home — Flagger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
 </head>
-
-<body id="background">
-  <div id="background-gradient"></div>
-  <content id="content">
-  
-<a id="share-btn" onclick="on_share()">
-  <i class="fa fa-share-alt" alt="🔗"></i>
-</a>
-
-  
-  <header id="header">
-    
-    
-     
-    
-
-    
-    
-    
-     
-    <h1 id="title"><a href=.>Flagger</a></h1>
-
-    
-    
-    
-     
-    <ul id="socials">
-        
-    </ul>
-
-    
-    
-</header>
-  
-  <main id="page">
-    <nav class="vertical" id="toc">
-
-<ul>
-
-<li class="nav-item">
-<a href="#recent-flags">Recent flags</a>
-    
-    <ul>
-    
-    </ul>
-    
-</li>
-
-</ul>
-
-</nav>
-    <div class="hero">
-  <p class="hero-lede">Daily digest of newly added, removed, and modified <a href="https://source.android.com/docs/core/ota/modular-system/aconfig">aconfig</a> feature flags in AOSP. Security-adjacent changes are highlighted so they're easy to skim.</p>
-  <div class="hero-stats">
-    <div class="hero-stat"><strong>2625</strong><span>flags tracked</span></div>
-    <div class="hero-stat"><strong>243</strong><span>aconfig files</span></div>
-    <div class="hero-stat"><strong>0</strong><span>daily reports</span></div>
-    <div class="hero-stat"><strong>2026-04-15</strong><span>last scan</span></div>
-  </div>
-</div>
-
-<h2 id="recent-flags">Recent flags<a class="headerlink" href="#recent-flags" title="Anchor">&para;</a></h2>
-<p>Sorted by Buganizer ID — higher IDs are more recently filed, which roughly tracks when a flag entered AOSP. This is a proxy, not an authoritative timeline.</p>
-<ul class="flag-list">
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.systemui.restrict_communal_shade_to_when_idle</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/446291379" rel="noopener">b/446291379</a>
-    </div>
-    <p class="flag-desc">Only allow for the shade to be pulled down over the hub when idle on the hub</p>
-    <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.app.supervision.flags.enable_supervision_settings_ui_updates</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/444303437" rel="noopener">b/444303437</a>
-    </div>
-    <p class="flag-desc">Flag that enables supervision settings phase 2 UI updates</p>
-    <div class="flag-meta"><span class="tag namespace">supervision</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.database.sqlite.report_active_db_configuration</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/444244330" rel="noopener">b/444244330</a>
-    </div>
-    <p class="flag-desc">Report the active DB journal and sync modes</p>
-    <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.systemui.blur_on_more_surfaces</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/444141641" rel="noopener">b/444141641</a>
-    </div>
-    <p class="flag-desc">Enable blur on more systemui surfaces</p>
-    <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.security.aapm_feature_usb_data_protection_delay_disable_auto_only</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/444044714" rel="noopener">b/444044714</a>
-    </div>
-    <p class="flag-desc">Limiting the delay disable for USB upon unplug only to auto connections</p>
-    <div class="flag-meta"><span class="tag namespace">preload_safety</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.security.aapm_feature_usb_data_protection_disable_data_for_charger_upon_lock</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/444044714" rel="noopener">b/444044714</a>
-    </div>
-    <p class="flag-desc">Disable USB data upon lock if existing connection is power brick</p>
-    <div class="flag-meta"><span class="tag namespace">preload_safety</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.window.flags.opt_out_override_orientation_to_user</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/443951799" rel="noopener">b/443951799</a>
-    </div>
-    <p class="flag-desc">If apps opt out universal resizable, the override-to-user should not take effect</p>
-    <div class="flag-meta"><span class="tag namespace">windowing_frontend</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.appsearch.flags.disable_action_package_removed_pruning</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/443737331" rel="noopener">b/443737331</a>
-    </div>
-    <p class="flag-desc">Kill switch to stop handling action_package_removed intents with REPLACING and DATA_REMOVED as package uninstalls.</p>
-    <div class="flag-meta"><span class="tag namespace">appsearch</span><span class="tag container">com.android.appsearch</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.media.tv.flags.tif_extension_standardization_c</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/443346064" rel="noopener">b/443346064</a>
-    </div>
-    <p class="flag-desc">Continue efforts for standardizing AIDL Extension Interface of TIS in Android 17</p>
-    <div class="flag-meta"><span class="tag namespace">tv_os</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.window.flags.app_compat_refactoring_use_activity_leash_for_letterboxing</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/443245627" rel="noopener">b/443245627</a>
-    </div>
-    <p class="flag-desc">Whether the Activity leash should be used as reference for letterbox surfaces.</p>
-    <div class="flag-meta"><span class="tag namespace">large_screen_experiences_app_compat</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.systemui.enable_cue_bar_animated_icon</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/443197064" rel="noopener">b/443197064</a>
-    </div>
-    <p class="flag-desc">Enable the animated icon in cue bar</p>
-    <div class="flag-meta"><span class="tag namespace">ailabs</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.window.flags.deprecate_surface_animation_frame_callback</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/443142083" rel="noopener">b/443142083</a>
-    </div>
-    <p class="flag-desc">Utilize postVsyncCallback from Choreographer for SurfaceAnimationRunner allowing more precise scheduling via vsyncId.</p>
-    <div class="flag-meta"><span class="tag namespace">window_surfaces</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.window.flags.deprecate_window_animator_frame_callback</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/443142083" rel="noopener">b/443142083</a>
-    </div>
-    <p class="flag-desc">Utilize postVsyncCallback from Choreographer for WindowAnimator allowing more precise scheduling via vsyncId.</p>
-    <div class="flag-meta"><span class="tag namespace">window_surfaces</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.server.am.app_start_info_process_name_fix</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/443136429" rel="noopener">b/443136429</a>
-    </div>
-    <p class="flag-desc">Use process name to lookup ProcessRecord.</p>
-    <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.security.stop_recognizing_legacy_password_hashes</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/442877927" rel="noopener">b/442877927</a>
-    </div>
-    <p class="flag-desc">Make LockSettingsService stop recognizing legacy password hashes</p>
-    <div class="flag-meta"><span class="tag namespace">security</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.media.flags.use_suggested_device_connection_manager</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/442856281" rel="noopener">b/442856281</a>
-    </div>
-    <p class="flag-desc">Use a separate class to manage the Suggested Device connection in Media Controls.</p>
-    <div class="flag-meta"><span class="tag namespace">media_better_together</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.companion.virtualdevice.flags.automated_app_launch_interception</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/442627126" rel="noopener">b/442627126</a>
-    </div>
-    <p class="flag-desc">Show a warning dialog when launching an automated app</p>
-    <div class="flag-meta"><span class="tag namespace">virtual_devices</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.os.vibrator.composition_pwle_apis</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/442507169" rel="noopener">b/442507169</a>
-    </div>
-    <p class="flag-desc">Enabled public APIs to support composition of PWLE effects and primitives</p>
-    <div class="flag-meta"><span class="tag namespace">haptics</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.os.vibrator.remove_hidl_support</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/442504716" rel="noopener">b/442504716</a>
-    </div>
-    <p class="flag-desc">Remove framework code to support HIDL vibrator HALs.</p>
-    <div class="flag-meta"><span class="tag namespace">haptics</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.os.parcel_string_cache_enabled</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/442140362" rel="noopener">b/442140362</a>
-    </div>
-    <p class="flag-desc">Enable JNIStringCache in Parcel</p>
-    <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.app.supervision.flags.enable_app_service_connection_callback</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441932377" rel="noopener">b/441932377</a>
-    </div>
-    <p class="flag-desc">Enables AppBindingService to dispatch actions to be executed by AppServiceConnection after a connection is established.</p>
-    <div class="flag-meta"><span class="tag namespace">supervision</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.hardware.input.enable_talkback_key_gestures</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441787329" rel="noopener">b/441787329</a>
-    </div>
-    <p class="flag-desc">Adds key gesture for TalkBack</p>
-    <div class="flag-meta"><span class="tag namespace">accessibility</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.tracing.protolog_auto_clear_incremental_state</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441704171" rel="noopener">b/441704171</a>
-    </div>
-    <p class="flag-desc">Clear incremental state when protolog is enabled</p>
-    <div class="flag-meta"><span class="tag namespace">windowing_tools</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.permission.flags.content_restriction_role_enabled</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441559663" rel="noopener">b/441559663</a>
-    </div>
-    <p class="flag-desc">This flag is used to enable the content restriction role</p>
-    <div class="flag-meta"><span class="tag namespace">content_restriction</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.server.biometrics.internal_cleanup_for_all_profiles</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441557507" rel="noopener">b/441557507</a>
-    </div>
-    <p class="flag-desc">Feature flag for scheduling internal cleanup for all profiles</p>
-    <div class="flag-meta"><span class="tag namespace">biometrics_framework</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.appsearch.flags.enable_apps_indexer_multilingual_names</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441550876" rel="noopener">b/441550876</a>
-    </div>
-    <p class="flag-desc">Gets labels across all languages for an app and adds them to alternate names</p>
-    <div class="flag-meta"><span class="tag namespace">appsearch</span><span class="tag container">com.android.appsearch</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.window.flags.reenable_app_handle_color_animations</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441497981" rel="noopener">b/441497981</a>
-    </div>
-    <p class="flag-desc">Re-enables the app handle color animations</p>
-    <div class="flag-meta"><span class="tag namespace">lse_desktop_experience</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.settings.flags.catalyst_tether_settings_26q1</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441443762" rel="noopener">b/441443762</a>
-    </div>
-    <p class="flag-desc">Flag for settings inside Hotspot &amp; tethering for 26Q1 release</p>
-    <div class="flag-meta"><span class="tag namespace">android_settings</span><span class="tag container">system_ext</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.systemui.update_keyguard_on_wake_and_unlock_earlier</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441261701" rel="noopener">b/441261701</a>
-    </div>
-    <p class="flag-desc">Call updateIsKeyguard earlier than on the dozing callback.</p>
-    <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.window.flags.close_fullscreen_and_splitscreen_keyboard_shortcut</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441147192" rel="noopener">b/441147192</a>
-    </div>
-    <p class="flag-desc">Enable keyboard shortcut to close fullscreen and split screen tasks</p>
-    <div class="flag-meta"><span class="tag namespace">lse_desktop_experience</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.location.flags.disable_hardware_ar</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/441145460" rel="noopener">b/441145460</a>
-    </div>
-    <p class="flag-desc">Disables the legacy hardware AR code path which has been deprecated for a long time</p>
-    <div class="flag-meta"><span class="tag namespace">location</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.wm.shell.fix_exit_split_on_enter_bubble</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440647718" rel="noopener">b/440647718</a>
-    </div>
-    <p class="flag-desc">Fixes a bug where split screen remains active if one of the tasks moves to bubble via a trampoline task.</p>
-    <div class="flag-meta"><span class="tag namespace">multitasking</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.app.jank.instrument_scrollview_scroll_states</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440646411" rel="noopener">b/440646411</a>
-    </div>
-    <p class="flag-desc">when enabled scrollview types will report scroll state changes to janktracker</p>
-    <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.hardware.input.bluetooth_wakeup_state_check</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440645135" rel="noopener">b/440645135</a>
-    </div>
-    <p class="flag-desc">Check Bluetooth HID profile connection state is changed before waking up the device.</p>
-    <div class="flag-meta"><span class="tag namespace">desktop_pnp</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.os.enable_angle_for_games</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440630034" rel="noopener">b/440630034</a>
-    </div>
-    <p class="flag-desc">Whether to use angle driver for games not in the denylist</p>
-    <div class="flag-meta"><span class="tag namespace">gpu</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.systemui.notification_fix_hun_shadows</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440572084" rel="noopener">b/440572084</a>
-    </div>
-    <p class="flag-desc">Fix HUN shadows when the shade is collapsed.</p>
-    <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.webkit.always_enforce_thread_checking</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440569275" rel="noopener">b/440569275</a>
-    </div>
-    <p class="flag-desc">Always enforce that WebView APIs are called on the same thread</p>
-    <div class="flag-meta"><span class="tag namespace">webview</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.view.inputmethod.unify_skip_animation_once_with_initially_visible</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440511879" rel="noopener">b/440511879</a>
-    </div>
-    <p class="flag-desc">Deprecating skipAnimationOnce and using initiallyVisible instead.</p>
-    <div class="flag-meta"><span class="tag namespace">input_method</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.window.flags.enable_per_display_window_decor_view_host_pool</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440247561" rel="noopener">b/440247561</a>
-    </div>
-    <p class="flag-desc">Enables per-display WindowDecoration ViewHost pooling</p>
-    <div class="flag-meta"><span class="tag namespace">lse_desktop_experience</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.hardware.usb.flags.enable_uaoa_all_pixels_except_p8</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440091110" rel="noopener">b/440091110</a>
-    </div>
-    <p class="flag-desc">Enables AOA userspace implementation all pixel devices except pixel 8 series</p>
-    <div class="flag-meta"><span class="tag namespace">system_sw_usb</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.hardware.usb.flags.enable_uaoa_p8</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440091110" rel="noopener">b/440091110</a>
-    </div>
-    <p class="flag-desc">Enables AOA userspace implementation only for pixel 8 series devices</p>
-    <div class="flag-meta"><span class="tag namespace">system_sw_usb</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.net.platform.flags.delete_vpn_profile_when_app_uninstalled</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440083803" rel="noopener">b/440083803</a>
-    </div>
-    <p class="flag-desc">Flag for deleting VPN profile when the provisioning app is uninstalled</p>
-    <div class="flag-meta"><span class="tag namespace">android_core_networking</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.settings.flags.remove_protection_layout</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/440023111" rel="noopener">b/440023111</a>
-    </div>
-    <p class="flag-desc">This flag controls whether remove protection layout in biometrics settings</p>
-    <div class="flag-meta"><span class="tag namespace">biometrics_integration</span><span class="tag container">system_ext</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.wm.shell.enable_2x1_split</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/439992109" rel="noopener">b/439992109</a>
-    </div>
-    <p class="flag-desc">Enables the 2x1 split implementation</p>
-    <div class="flag-meta"><span class="tag namespace">multitasking</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.systemui.ambient_cue_plugin</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/439907833" rel="noopener">b/439907833</a>
-    </div>
-    <p class="flag-desc">Enable plugin for ambient cue project</p>
-    <div class="flag-meta"><span class="tag namespace">ailabs</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">android.app.jank.instrument_listview_scroll_states</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/439161162" rel="noopener">b/439161162</a>
-    </div>
-    <p class="flag-desc">when enabled listview types will report scroll state changes to janktracker</p>
-    <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.media.projection.flags.stop_on_display_removal</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/439017127" rel="noopener">b/439017127</a>
-    </div>
-    <p class="flag-desc">Stops the current media projection session when the recorded display is removed</p>
-    <div class="flag-meta"><span class="tag namespace">media_projection</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.systemui.qs_edit_mode_v2</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/438943936" rel="noopener">b/438943936</a>
-    </div>
-    <p class="flag-desc">Updates the removal process of tiles and improves tiles selection.</p>
-    <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.media.mediasession.flags.remove_audioplayerstatemonitor_static_memoization</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/438917725" rel="noopener">b/438917725</a>
-    </div>
-    <p class="flag-desc">Remove the static memoization from AudioPlayerStateMonitor.getInstance(Context).</p>
-    <div class="flag-meta"><span class="tag namespace">media_solutions</span><span class="tag container">system</span></div>
-  </li>
-  <li class="flag">
-    <div class="flag-head">
-      <code class="flag-key">com.android.window.flags.defer_resume_focus_in_non_focused_window</code>
-      <a class="flag-bug" href="https://issuetracker.google.com/issues/438781414" rel="noopener">b/438781414</a>
-    </div>
-    <p class="flag-desc">Gates the logic that prevents the system from restoring focus to a view /n</p>
-    <div class="flag-meta"><span class="tag namespace">lse_desktop_experience</span><span class="tag container">system</span></div>
-  </li>
-</ul>
-    <nav id="page-controls">
-      <a href="#content" id="return-top">
-        <i class="fa fa-arrow-up" alt="⇧"></i> Return to top
-      </a>
+<body>
+<header class="site">
+  <div class="wrap">
+    <h1><a href="index.html">Flagger</a></h1>
+    <div class="tagline">Daily digest of AOSP aconfig feature flag changes</div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="reports/index.html">Archives</a>
     </nav>
-  </main>
-  </content>
-  <footer id="footer">
-    
+  </div>
+</header>
+<main>
 
-<p>Compiled from markdown using <a href="https://www.mkdocs.org/">MkDocs</a>. Theme is <a href="https://teparsons.github.io/mkdocs-landing/">Landing</a> by <a href="https://toddparsons.co.uk">Todd Parsons</a>.</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script src="search/main.js"></script>
-
-  </footer>
+    <section class="hero">
+      <p class="hero-lede">Daily digest of newly added, removed, and modified <a href="https://source.android.com/docs/core/ota/modular-system/aconfig">aconfig</a> feature flags in AOSP. Security-adjacent changes are highlighted so they're easy to skim.</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>2625</strong><span>flags tracked</span></div>
+        <div class="hero-stat"><strong>243</strong><span>aconfig files</span></div>
+        <div class="hero-stat"><a href="reports/index.html"><strong>0</strong><span>daily reports</span></a></div>
+        <div class="hero-stat"><strong>2026-04-15</strong><span>last scan</span></div>
+      </div>
+    </section>
+    <section class="latest-flags">
+      <h2>Recent flags</h2>
+      <p class="preamble">Sorted by Buganizer ID — higher IDs are more recently filed, which roughly tracks when a flag entered AOSP. This is a proxy, not an authoritative timeline.</p>
+      <ul class="flag-list"><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.systemui.restrict_communal_shade_to_when_idle</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/446291379" rel="noopener">b/446291379</a>
+  </div>
+  <p class="flag-desc">Only allow for the shade to be pulled down over the hub when idle on the hub</p>
+  <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.app.supervision.flags.enable_supervision_settings_ui_updates</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/444303437" rel="noopener">b/444303437</a>
+  </div>
+  <p class="flag-desc">Flag that enables supervision settings phase 2 UI updates</p>
+  <div class="flag-meta"><span class="tag namespace">supervision</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.database.sqlite.report_active_db_configuration</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/444244330" rel="noopener">b/444244330</a>
+  </div>
+  <p class="flag-desc">Report the active DB journal and sync modes</p>
+  <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.systemui.blur_on_more_surfaces</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/444141641" rel="noopener">b/444141641</a>
+  </div>
+  <p class="flag-desc">Enable blur on more systemui surfaces</p>
+  <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.security.aapm_feature_usb_data_protection_delay_disable_auto_only</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/444044714" rel="noopener">b/444044714</a>
+  </div>
+  <p class="flag-desc">Limiting the delay disable for USB upon unplug only to auto connections</p>
+  <div class="flag-meta"><span class="tag namespace">preload_safety</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.security.aapm_feature_usb_data_protection_disable_data_for_charger_upon_lock</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/444044714" rel="noopener">b/444044714</a>
+  </div>
+  <p class="flag-desc">Disable USB data upon lock if existing connection is power brick</p>
+  <div class="flag-meta"><span class="tag namespace">preload_safety</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.window.flags.opt_out_override_orientation_to_user</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/443951799" rel="noopener">b/443951799</a>
+  </div>
+  <p class="flag-desc">If apps opt out universal resizable, the override-to-user should not take effect</p>
+  <div class="flag-meta"><span class="tag namespace">windowing_frontend</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.appsearch.flags.disable_action_package_removed_pruning</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/443737331" rel="noopener">b/443737331</a>
+  </div>
+  <p class="flag-desc">Kill switch to stop handling action_package_removed intents with REPLACING and DATA_REMOVED as package uninstalls.</p>
+  <div class="flag-meta"><span class="tag namespace">appsearch</span><span class="tag container">com.android.appsearch</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.media.tv.flags.tif_extension_standardization_c</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/443346064" rel="noopener">b/443346064</a>
+  </div>
+  <p class="flag-desc">Continue efforts for standardizing AIDL Extension Interface of TIS in Android 17</p>
+  <div class="flag-meta"><span class="tag namespace">tv_os</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.window.flags.app_compat_refactoring_use_activity_leash_for_letterboxing</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/443245627" rel="noopener">b/443245627</a>
+  </div>
+  <p class="flag-desc">Whether the Activity leash should be used as reference for letterbox surfaces.</p>
+  <div class="flag-meta"><span class="tag namespace">large_screen_experiences_app_compat</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.systemui.enable_cue_bar_animated_icon</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/443197064" rel="noopener">b/443197064</a>
+  </div>
+  <p class="flag-desc">Enable the animated icon in cue bar</p>
+  <div class="flag-meta"><span class="tag namespace">ailabs</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.window.flags.deprecate_surface_animation_frame_callback</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/443142083" rel="noopener">b/443142083</a>
+  </div>
+  <p class="flag-desc">Utilize postVsyncCallback from Choreographer for SurfaceAnimationRunner allowing more precise scheduling via vsyncId.</p>
+  <div class="flag-meta"><span class="tag namespace">window_surfaces</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.window.flags.deprecate_window_animator_frame_callback</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/443142083" rel="noopener">b/443142083</a>
+  </div>
+  <p class="flag-desc">Utilize postVsyncCallback from Choreographer for WindowAnimator allowing more precise scheduling via vsyncId.</p>
+  <div class="flag-meta"><span class="tag namespace">window_surfaces</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.server.am.app_start_info_process_name_fix</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/443136429" rel="noopener">b/443136429</a>
+  </div>
+  <p class="flag-desc">Use process name to lookup ProcessRecord.</p>
+  <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.security.stop_recognizing_legacy_password_hashes</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/442877927" rel="noopener">b/442877927</a>
+  </div>
+  <p class="flag-desc">Make LockSettingsService stop recognizing legacy password hashes</p>
+  <div class="flag-meta"><span class="tag namespace">security</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.media.flags.use_suggested_device_connection_manager</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/442856281" rel="noopener">b/442856281</a>
+  </div>
+  <p class="flag-desc">Use a separate class to manage the Suggested Device connection in Media Controls.</p>
+  <div class="flag-meta"><span class="tag namespace">media_better_together</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.companion.virtualdevice.flags.automated_app_launch_interception</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/442627126" rel="noopener">b/442627126</a>
+  </div>
+  <p class="flag-desc">Show a warning dialog when launching an automated app</p>
+  <div class="flag-meta"><span class="tag namespace">virtual_devices</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.os.vibrator.composition_pwle_apis</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/442507169" rel="noopener">b/442507169</a>
+  </div>
+  <p class="flag-desc">Enabled public APIs to support composition of PWLE effects and primitives</p>
+  <div class="flag-meta"><span class="tag namespace">haptics</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.os.vibrator.remove_hidl_support</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/442504716" rel="noopener">b/442504716</a>
+  </div>
+  <p class="flag-desc">Remove framework code to support HIDL vibrator HALs.</p>
+  <div class="flag-meta"><span class="tag namespace">haptics</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.os.parcel_string_cache_enabled</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/442140362" rel="noopener">b/442140362</a>
+  </div>
+  <p class="flag-desc">Enable JNIStringCache in Parcel</p>
+  <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.app.supervision.flags.enable_app_service_connection_callback</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441932377" rel="noopener">b/441932377</a>
+  </div>
+  <p class="flag-desc">Enables AppBindingService to dispatch actions to be executed by AppServiceConnection after a connection is established.</p>
+  <div class="flag-meta"><span class="tag namespace">supervision</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.hardware.input.enable_talkback_key_gestures</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441787329" rel="noopener">b/441787329</a>
+  </div>
+  <p class="flag-desc">Adds key gesture for TalkBack</p>
+  <div class="flag-meta"><span class="tag namespace">accessibility</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.tracing.protolog_auto_clear_incremental_state</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441704171" rel="noopener">b/441704171</a>
+  </div>
+  <p class="flag-desc">Clear incremental state when protolog is enabled</p>
+  <div class="flag-meta"><span class="tag namespace">windowing_tools</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.permission.flags.content_restriction_role_enabled</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441559663" rel="noopener">b/441559663</a>
+  </div>
+  <p class="flag-desc">This flag is used to enable the content restriction role</p>
+  <div class="flag-meta"><span class="tag namespace">content_restriction</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.server.biometrics.internal_cleanup_for_all_profiles</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441557507" rel="noopener">b/441557507</a>
+  </div>
+  <p class="flag-desc">Feature flag for scheduling internal cleanup for all profiles</p>
+  <div class="flag-meta"><span class="tag namespace">biometrics_framework</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.appsearch.flags.enable_apps_indexer_multilingual_names</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441550876" rel="noopener">b/441550876</a>
+  </div>
+  <p class="flag-desc">Gets labels across all languages for an app and adds them to alternate names</p>
+  <div class="flag-meta"><span class="tag namespace">appsearch</span><span class="tag container">com.android.appsearch</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.window.flags.reenable_app_handle_color_animations</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441497981" rel="noopener">b/441497981</a>
+  </div>
+  <p class="flag-desc">Re-enables the app handle color animations</p>
+  <div class="flag-meta"><span class="tag namespace">lse_desktop_experience</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.settings.flags.catalyst_tether_settings_26q1</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441443762" rel="noopener">b/441443762</a>
+  </div>
+  <p class="flag-desc">Flag for settings inside Hotspot &amp; tethering for 26Q1 release</p>
+  <div class="flag-meta"><span class="tag namespace">android_settings</span><span class="tag container">system_ext</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.systemui.update_keyguard_on_wake_and_unlock_earlier</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441261701" rel="noopener">b/441261701</a>
+  </div>
+  <p class="flag-desc">Call updateIsKeyguard earlier than on the dozing callback.</p>
+  <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.window.flags.close_fullscreen_and_splitscreen_keyboard_shortcut</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441147192" rel="noopener">b/441147192</a>
+  </div>
+  <p class="flag-desc">Enable keyboard shortcut to close fullscreen and split screen tasks</p>
+  <div class="flag-meta"><span class="tag namespace">lse_desktop_experience</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.location.flags.disable_hardware_ar</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/441145460" rel="noopener">b/441145460</a>
+  </div>
+  <p class="flag-desc">Disables the legacy hardware AR code path which has been deprecated for a long time</p>
+  <div class="flag-meta"><span class="tag namespace">location</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.wm.shell.fix_exit_split_on_enter_bubble</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440647718" rel="noopener">b/440647718</a>
+  </div>
+  <p class="flag-desc">Fixes a bug where split screen remains active if one of the tasks moves to bubble via a trampoline task.</p>
+  <div class="flag-meta"><span class="tag namespace">multitasking</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.app.jank.instrument_scrollview_scroll_states</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440646411" rel="noopener">b/440646411</a>
+  </div>
+  <p class="flag-desc">when enabled scrollview types will report scroll state changes to janktracker</p>
+  <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.hardware.input.bluetooth_wakeup_state_check</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440645135" rel="noopener">b/440645135</a>
+  </div>
+  <p class="flag-desc">Check Bluetooth HID profile connection state is changed before waking up the device.</p>
+  <div class="flag-meta"><span class="tag namespace">desktop_pnp</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.os.enable_angle_for_games</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440630034" rel="noopener">b/440630034</a>
+  </div>
+  <p class="flag-desc">Whether to use angle driver for games not in the denylist</p>
+  <div class="flag-meta"><span class="tag namespace">gpu</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.systemui.notification_fix_hun_shadows</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440572084" rel="noopener">b/440572084</a>
+  </div>
+  <p class="flag-desc">Fix HUN shadows when the shade is collapsed.</p>
+  <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.webkit.always_enforce_thread_checking</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440569275" rel="noopener">b/440569275</a>
+  </div>
+  <p class="flag-desc">Always enforce that WebView APIs are called on the same thread</p>
+  <div class="flag-meta"><span class="tag namespace">webview</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.view.inputmethod.unify_skip_animation_once_with_initially_visible</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440511879" rel="noopener">b/440511879</a>
+  </div>
+  <p class="flag-desc">Deprecating skipAnimationOnce and using initiallyVisible instead.</p>
+  <div class="flag-meta"><span class="tag namespace">input_method</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.window.flags.enable_per_display_window_decor_view_host_pool</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440247561" rel="noopener">b/440247561</a>
+  </div>
+  <p class="flag-desc">Enables per-display WindowDecoration ViewHost pooling</p>
+  <div class="flag-meta"><span class="tag namespace">lse_desktop_experience</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.hardware.usb.flags.enable_uaoa_all_pixels_except_p8</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440091110" rel="noopener">b/440091110</a>
+  </div>
+  <p class="flag-desc">Enables AOA userspace implementation all pixel devices except pixel 8 series</p>
+  <div class="flag-meta"><span class="tag namespace">system_sw_usb</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.hardware.usb.flags.enable_uaoa_p8</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440091110" rel="noopener">b/440091110</a>
+  </div>
+  <p class="flag-desc">Enables AOA userspace implementation only for pixel 8 series devices</p>
+  <div class="flag-meta"><span class="tag namespace">system_sw_usb</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.net.platform.flags.delete_vpn_profile_when_app_uninstalled</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440083803" rel="noopener">b/440083803</a>
+  </div>
+  <p class="flag-desc">Flag for deleting VPN profile when the provisioning app is uninstalled</p>
+  <div class="flag-meta"><span class="tag namespace">android_core_networking</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.settings.flags.remove_protection_layout</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/440023111" rel="noopener">b/440023111</a>
+  </div>
+  <p class="flag-desc">This flag controls whether remove protection layout in biometrics settings</p>
+  <div class="flag-meta"><span class="tag namespace">biometrics_integration</span><span class="tag container">system_ext</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.wm.shell.enable_2x1_split</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/439992109" rel="noopener">b/439992109</a>
+  </div>
+  <p class="flag-desc">Enables the 2x1 split implementation</p>
+  <div class="flag-meta"><span class="tag namespace">multitasking</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.systemui.ambient_cue_plugin</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/439907833" rel="noopener">b/439907833</a>
+  </div>
+  <p class="flag-desc">Enable plugin for ambient cue project</p>
+  <div class="flag-meta"><span class="tag namespace">ailabs</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">android.app.jank.instrument_listview_scroll_states</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/439161162" rel="noopener">b/439161162</a>
+  </div>
+  <p class="flag-desc">when enabled listview types will report scroll state changes to janktracker</p>
+  <div class="flag-meta"><span class="tag namespace">system_performance</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.media.projection.flags.stop_on_display_removal</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/439017127" rel="noopener">b/439017127</a>
+  </div>
+  <p class="flag-desc">Stops the current media projection session when the recorded display is removed</p>
+  <div class="flag-meta"><span class="tag namespace">media_projection</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.systemui.qs_edit_mode_v2</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/438943936" rel="noopener">b/438943936</a>
+  </div>
+  <p class="flag-desc">Updates the removal process of tiles and improves tiles selection.</p>
+  <div class="flag-meta"><span class="tag namespace">systemui</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.media.mediasession.flags.remove_audioplayerstatemonitor_static_memoization</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/438917725" rel="noopener">b/438917725</a>
+  </div>
+  <p class="flag-desc">Remove the static memoization from AudioPlayerStateMonitor.getInstance(Context).</p>
+  <div class="flag-meta"><span class="tag namespace">media_solutions</span><span class="tag container">system</span></div>
+</li><li class="flag">
+  <div class="flag-head">
+    <code class="flag-key">com.android.window.flags.defer_resume_focus_in_non_focused_window</code>
+    <a class="flag-bug" href="https://issuetracker.google.com/issues/438781414" rel="noopener">b/438781414</a>
+  </div>
+  <p class="flag-desc">Gates the logic that prevents the system from restoring focus to a view /n</p>
+  <div class="flag-meta"><span class="tag namespace">lse_desktop_experience</span><span class="tag container">system</span></div>
+</li></ul>
+    </section>
+</main>
 </body>
-
 </html>

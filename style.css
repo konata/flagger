@@ -1,0 +1,346 @@
+/* ---------------------------------------------------------------------------
+   Flagger — single stylesheet for a JSON-driven static site.
+
+   Default theme is a warm light palette. A dark override kicks in for users
+   whose OS says `prefers-color-scheme: dark`. Every color the rest of the
+   file uses is a CSS custom property declared under :root, so swapping
+   themes is just re-binding those variables.
+
+   All semantic "status" colors (added/removed/modified/danger) also live
+   as variables — they need different hues in light vs dark for contrast,
+   not just a brightness flip.
+   --------------------------------------------------------------------------- */
+
+:root {
+  /* ---- palette (light, default) ---- */
+  --base:     #faf6f0;   /* page background */
+  --mantle:   #f3ede3;   /* card background */
+  --crust:    #e8e0d3;   /* borders, dividers */
+  --overlay:  #8a7d6f;   /* muted text */
+  --text:     #3f3836;   /* body text */
+  --hltext:   #1a1615;   /* headings, strong text */
+
+  --primary:   #0e7c8a;  /* cyan-teal, darker for light-bg contrast */
+  --secondary: #b8541e;  /* warm peach-orange */
+  --tertiary:  #a63a77;  /* pink */
+
+  --added:     #1e7a3e;  /* green */
+  --removed:   #b32138;  /* red */
+  --modified:  var(--secondary);
+  --danger-bg: #fce4e4;
+  --danger-fg: #7f1d1d;
+
+  /* ---- fonts ---- */
+  --heading: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --body:    "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* ---- palette (dark) — Catppuccin-mocha-adjacent warm dark ---- */
+    --base:     #1e1b1b;
+    --mantle:   #292426;
+    --crust:    #332b2f;
+    --overlay:  #7c6f74;
+    --text:     #c6c6c6;
+    --hltext:   #ffffff;
+
+    --primary:   #89dceb;
+    --secondary: #f5c27f;
+    --tertiary:  #f5c2e7;
+
+    --added:     #a6e3a1;
+    --removed:   #f38ba8;
+    --modified:  var(--secondary);
+    --danger-bg: #7f1d1d55;
+    --danger-fg: #fca5a5;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--base);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { color: var(--tertiary); }
+
+code, pre { font-family: var(--mono); font-size: 0.92em; }
+code {
+  background: var(--mantle);
+  color: var(--hltext);
+  padding: 0.05em 0.35em;
+  border-radius: 0.25em;
+  border: 1px solid var(--crust);
+}
+
+/* ---- layout shell ---- */
+
+header.site {
+  padding: 2.5rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--crust);
+  background: var(--mantle);
+}
+header.site .wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+header.site h1 {
+  margin: 0;
+  font-family: var(--heading);
+  font-weight: 900;
+  font-size: 1.9rem;
+  color: var(--hltext);
+  letter-spacing: -0.02em;
+}
+header.site h1 a { color: inherit; }
+header.site .tagline {
+  color: var(--overlay);
+  font-size: 0.95rem;
+}
+header.site nav a {
+  margin-left: 1.25rem;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+header.site nav a.active { color: var(--primary); }
+
+main {
+  flex: 1;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* Section headings — shared by report pages and the home "Recent flags"
+   section. Archives has its own h2 rule for month labels. */
+main h2 {
+  font-family: var(--heading);
+  color: var(--hltext);
+  margin: 2.5rem 0 0.25rem;
+  font-size: 1.25rem;
+  border-bottom: 1px solid var(--crust);
+  padding-bottom: 0.35rem;
+}
+main h3 {
+  font-family: var(--heading);
+  color: var(--secondary);
+  margin: 1.5rem 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* ---- home hero: lede paragraph + 4-stat scoreboard ---- */
+
+.hero {
+  border-left: 3px solid var(--primary);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  margin-bottom: 2.25rem;
+}
+.hero .hero-lede {
+  margin: 0;
+  color: var(--text);
+  max-width: 60ch;
+  font-size: 1.02rem;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.hero-stat {
+  background: var(--mantle);
+  border: 1px solid var(--crust);
+  border-radius: 0.45rem;
+  padding: 0.85rem 1rem;
+}
+.hero-stat a { color: inherit; display: block; }
+.hero-stat a:hover strong { color: var(--primary); }
+.hero-stat strong {
+  display: block;
+  font-family: var(--heading);
+  color: var(--hltext);
+  font-size: 1.5rem;
+  line-height: 1.1;
+  font-weight: 900;
+}
+.hero-stat span {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--overlay);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+@media (max-width: 640px) {
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---- home "Recent flags" list ---- */
+
+.latest-flags .preamble {
+  margin: 0.6rem 0 1rem;
+  color: var(--overlay);
+  font-size: 0.92rem;
+  max-width: 65ch;
+}
+ul.flag-list { list-style: none; padding: 0; margin: 0; }
+ul.flag-list > li.flag {
+  padding: 0.85rem 1rem;
+  margin: 0.5rem 0;
+  background: var(--mantle);
+  border: 1px solid var(--crust);
+  border-left: 2px solid var(--crust);
+  border-radius: 0 0.3rem 0.3rem 0;
+}
+.flag-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.flag-key {
+  color: var(--hltext);
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: none;
+  padding: 0;
+  border: 0;
+}
+.flag-bug {
+  color: var(--primary);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.flag-desc {
+  margin: 0.45rem 0 0;
+  color: var(--text);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.flag-meta { margin-top: 0.55rem; }
+.flag-meta .tag:first-child { margin-left: 0; }
+
+/* ---- report page body ---- */
+
+article.report h1 {
+  font-family: var(--heading);
+  color: var(--hltext);
+  font-size: 1.7rem;
+  margin: 0 0 0.5rem;
+}
+article.report .meta {
+  color: var(--overlay);
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  margin-bottom: 2rem;
+}
+article.report .meta .added    { color: var(--added); }
+article.report .meta .removed  { color: var(--removed); }
+article.report .meta .modified { color: var(--modified); }
+
+ul.flags { list-style: none; padding: 0; margin: 0; }
+ul.flags > li {
+  padding: 0.65rem 0.9rem;
+  margin: 0.4rem 0;
+  background: var(--mantle);
+  border: 1px solid var(--crust);
+  border-left: 2px solid var(--crust);
+  border-radius: 0 0.3rem 0.3rem 0;
+}
+ul.flags > li.sec    { border-left-color: var(--tertiary); }
+ul.flags > li .key   { color: var(--hltext); font-weight: 600; }
+ul.flags > li .ns    { color: var(--secondary); font-style: italic; margin-left: 0.5rem; }
+ul.flags > li .detail {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--text);
+  font-size: 0.93rem;
+}
+ul.flags > li .file  { color: var(--overlay); font-family: var(--mono); font-size: 0.82rem; }
+
+/* ---- tags ---- */
+
+.tag {
+  display: inline-block;
+  padding: 0.05em 0.45em;
+  margin-left: 0.3rem;
+  border-radius: 0.25em;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  background: var(--crust);
+  color: var(--text);
+}
+.tag.security   { background: color-mix(in srgb, var(--tertiary)  22%, transparent); color: var(--tertiary); }
+.tag.bugfix     { background: color-mix(in srgb, var(--secondary) 22%, transparent); color: var(--secondary); }
+.tag.exported   { background: color-mix(in srgb, var(--primary)   18%, transparent); color: var(--primary); }
+.tag.suspicious { background: var(--danger-bg); color: var(--danger-fg); }
+.tag.namespace  { background: color-mix(in srgb, var(--secondary) 14%, transparent); color: var(--secondary); }
+.tag.container  { background: color-mix(in srgb, var(--primary)   14%, transparent); color: var(--primary); }
+
+/* ---- field-change rows inside modified entries ---- */
+
+.field-change {
+  display: block;
+  margin-top: 0.25rem;
+  padding-left: 1rem;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.field-change .before { color: var(--removed); }
+.field-change .after  { color: var(--added); }
+
+.empty {
+  color: var(--overlay);
+  font-style: italic;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+/* ---- archives page ---- */
+
+.archives h2 {
+  font-family: var(--heading);
+  color: var(--secondary);
+  margin: 2rem 0 0.75rem;
+  font-size: 1.1rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.archives ul { list-style: none; padding: 0; margin: 0; }
+.archives li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--crust);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+}
+.archives li .totals { color: var(--overlay); }
